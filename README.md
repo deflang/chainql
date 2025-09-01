@@ -1,8 +1,16 @@
 # ChainQL 🌱
 
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/chainql?style=social)](https://github.com/yourusername/chainql/stargazers)
+[![npm version](https://img.shields.io/npm/v/chainql)](https://www.npmjs.com/package/chainql)
+[![PyPI version](https://img.shields.io/pypi/v/chainql)](https://pypi.org/project/chainql/)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/yourusername/chainql/ci.yml?branch=main)](https://github.com/yourusername/chainql/actions)
+[![License](https://img.shields.io/github/license/yourusername/chainql)](LICENSE)
+
 **Natural language → Ethereum on-chain data, instantly.**  
 
 ChainQL is an MVP tool that lets developers query Ethereum blockchain data using simple English commands. No need to manually touch RPC endpoints, The Graph, or decode events — just type your query and get structured JSON or tables.
+
+> ⭐ If you find ChainQL useful, please **star this repo**! Your support is crucial for our growth and helps us improve faster.  
 
 ---
 
@@ -54,6 +62,8 @@ pip install chainql
 ## 💻 Usage
 ```bash
 chainql query "show me USDC transfers last 24h" --format table --limit 50
+
+chainql query "top 5 Uniswap swaps today above 10000 USD" --format table
+
+chainql query "show me BAYC NFT sales last 7 days" --format json
 ```
-
-
