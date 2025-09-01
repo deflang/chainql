@@ -4,12 +4,36 @@ import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
+  // Global ignores (applies to all configs)
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
-    ignores: ['coverage/**', 'jest.config.js', 'dist/**', 'node_modules/**', "jest.config.js"],
+    ignores: [
+      "coverage/**",
+      "dist/**",
+      "build/**",
+      "node_modules/**",
+      "*.min.js",
+      ".env*",
+      "jest.config.js",
+    ],
   },
-  tseslint.configs.recommended,
+
+  // JavaScript files configuration
+  {
+    files: ["**/*.{js,mjs,cjs}"],
+    ...js.configs.recommended,
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+
+  // TypeScript files configuration
+  {
+    files: ["**/*.{ts,mts,cts,tsx}"],
+    languageOptions: {
+      globals: globals.browser,
+    },
+  },
+
+  // Apply TypeScript ESLint recommended configs
+  ...tseslint.configs.recommended,
 ]);
