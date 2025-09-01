@@ -1,7 +1,5 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-# Run lint on staged files
+# Run lint
 npm run lint
 
 # Run tests
