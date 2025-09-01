@@ -4,7 +4,7 @@
 [![npm version](https://img.shields.io/npm/v/chainql)](https://www.npmjs.com/package/chainql)
 [![PyPI version](https://img.shields.io/pypi/v/chainql)](https://pypi.org/project/chainql/)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/deflang/chainql/ci.yml?branch=main)](https://github.com/deflang/chainql/actions)
-[![License](https://img.shields.io/github/license/deflang/chainql)](LICENSE)
+[![License](https://img.shields.io/github/license/deflang/chainql)](./LICENSE)
 
 **Natural language → Ethereum on-chain data, instantly.**
 
