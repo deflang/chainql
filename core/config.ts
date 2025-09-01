@@ -15,7 +15,10 @@ export function loadConfig(
 
   let fileConfig: ChainQLConfig = {};
   if (fs.existsSync(configPath)) {
+    console.log("Using config file:", configPath);
     fileConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+  } else {
+    console.log("No config file found at:", configPath);
   }
 
   const envConfig: ChainQLConfig = {
