@@ -1,4 +1,7 @@
-# Run lint
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run lint on staged files
 npm run lint
 
 # Run tests
