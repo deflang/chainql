@@ -12,18 +12,30 @@ jobs:
     name: Validate commit messages
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5.0.0
         with:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
-          node-version: "18"
-          cache: "npm"
+          node-version: 18
+          always-auth: false
+          check-latest: false
+          # Don't use cache initially
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm install
+          # This will generate package-lock.json
+
+      - name: Cache dependencies
+        uses: actions/cache@v4.2.4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Validate current commit (push)
         if: github.event_name == 'push'
