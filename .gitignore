@@ -53,8 +53,3 @@ Thumbs.db
 *.tmp
 *.swp
 *.swo
-
-# npm package
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
