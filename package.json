@@ -38,11 +38,11 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "commitlint": "commitlint --edit",
-    "prepare": "husky",
+    "prepare": "husky || echo 'skip husky in prod'",
     "test": "jest"
   },
   "files": [
-    "build"
+    "dist"
   ],
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",
