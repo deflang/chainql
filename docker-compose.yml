@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  chainql-mcp:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - INFURA_API_KEY=${INFURA_API_KEY}
+      - PORT=3000
+      - NODE_ENV=production
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
