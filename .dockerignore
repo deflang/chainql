@@ -13,3 +13,4 @@ coverage
 dist
 src/**/*.test.ts
 src/**/*.spec.ts
+commitlint
