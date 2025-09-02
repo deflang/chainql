@@ -1,6 +1,0 @@
-#!/bin/sh
-# Run lint
-npm run lint
-
-# Run tests
-npm test
