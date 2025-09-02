@@ -13,4 +13,12 @@ coverage
 dist
 src/**/*.test.ts
 src/**/*.spec.ts
-commitlint
+commitlint.config.js
+.husky
+.vscode
+.idea
+*.iml
+*.log
+*.tsbuildinfo
+.DS_Store
+.cache
