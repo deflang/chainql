@@ -41,6 +41,9 @@ jobs:
   # Test job - run your tests
   test:
     runs-on: ubuntu-latest
+    - name: Set environment variable
+      run: echo "INFURA_API_KEY=test_key" >> $GITHUB_ENV
+
     name: Run tests
     steps:
       - name: Checkout code
