@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
+import { CallToolResult } from "@modelcontextprotocol/sdk/types";
 import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
