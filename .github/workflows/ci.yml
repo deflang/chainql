@@ -8,6 +8,7 @@ on:
 
 env:
   NODE_VERSION: '20'
+  INFURA_API_KEY: test_key
 
 jobs:
   # Commitlint job - validate commit messages
