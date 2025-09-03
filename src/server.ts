@@ -18,6 +18,7 @@ export const ExpressHttpStreamableMcpServer = (
   const server = new McpServer({
     name: options.name,
     version: "1.0.0",
+    title: "Infura MCP Server",
   });
 
   setupCb(server);

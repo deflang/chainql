@@ -1,4 +1,5 @@
 import { tools } from "../../tools";
+import { getAccounts } from "../../tools/getAccounts";
 import { getEthBalance } from "../../tools/getBalance.js";
 import { getTransactionCount } from "../../tools/getTransactionCount.js";
 
@@ -10,10 +11,11 @@ describe("tools module", () => {
   it("should contain the correct tools", () => {
     expect(tools).toContain(getEthBalance);
     expect(tools).toContain(getTransactionCount);
+    expect(tools).toContain(getAccounts);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(2);
+    expect(tools).toHaveLength(3);
   });
 
   it("should have tools with correct names", () => {
