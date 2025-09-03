@@ -11,7 +11,7 @@ infura-mcp is a MCP server that lets developers query Ethereum blockchain data u
 
 > ⭐ If you find infura-mcp useful, please **star this repo**! Your support is crucial for our growth and helps us improve faster.
 
-This project is not sponsored or supported by Infura in any way.
+This project is not sponsored or supported by [Infura](https://www.infura.io) in any way.
 
 ---
 
