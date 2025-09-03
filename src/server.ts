@@ -3,9 +3,7 @@ import { randomUUID } from "node:crypto";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { InMemoryEventStore } from "@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js";
-import {
-  isInitializeRequest,
-} from "@modelcontextprotocol/sdk/types.js";
+import { isInitializeRequest } from "@modelcontextprotocol/sdk/types.js";
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,7 +13,7 @@ interface ServerOptions {
 
 export const ExpressHttpStreamableMcpServer = (
   options: ServerOptions,
-  setupCb: (server: McpServer) => void
+  setupCb: (_server: McpServer) => void
 ) => {
   const server = new McpServer({
     name: options.name,
@@ -86,6 +84,7 @@ export const ExpressHttpStreamableMcpServer = (
       res.status(400).send("Invalid or missing session ID");
       return;
     }
+
     const transport = transports[sessionId];
     await transport.handleRequest(req, res);
   });
@@ -96,6 +95,7 @@ export const ExpressHttpStreamableMcpServer = (
       res.status(400).send("Invalid or missing session ID");
       return;
     }
+
     const transport = transports[sessionId];
     await transport.handleRequest(req, res);
     delete transports[sessionId];
@@ -112,9 +112,13 @@ export const ExpressHttpStreamableMcpServer = (
         if (transports[sessionId]) {
           await transports[sessionId].close();
         }
-      } catch {}
+      } catch (error) {
+        // Ignore errors during transport close - we're shutting down anyway
+        console.warn(`Error closing transport ${sessionId}: ${error}`);
+      }
       delete transports[sessionId];
     }
+
     express_server.close();
     await server.close();
     console.log("Server shutdown complete");
