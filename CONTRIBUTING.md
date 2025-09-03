@@ -1,7 +1,7 @@
-# Contributing to ChainQL
+# Contributing to infura-mcp
 
-Thank you for considering contributing to **ChainQL**! 🎉  
-Whether it’s code, documentation, bug reports, or new ideas, your contributions help make ChainQL better for everyone.
+Thank you for considering contributing to **infura-mcp**! 🎉  
+Whether it’s code, documentation, bug reports, or new ideas, your contributions help make infura-mcp better for everyone.
 
 ---
 
@@ -19,8 +19,8 @@ See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for details.
 ### 1. Fork & Clone
 
 ```bash
-git clone https://github.com/deflang/chainql.git
-cd chainql
+git clone https://github.com/deflang/infura-mcp.git
+cd infura-mcp
 ```
 
 ### 2. Install dependencies
@@ -91,4 +91,4 @@ git push origin feature/add-uniswap-query
 ## Licensing
 
 By contributing, you agree that your contributions will be licensed under the [MIT License](./LICENSE).
-This ensures that all contributions remain free, open-source, and usable by the community, just like the rest of ChainQL.
+This ensures that all contributions remain free, open-source, and usable by the community, just like the rest of infura-mcp.

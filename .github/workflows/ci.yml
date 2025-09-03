@@ -82,16 +82,16 @@ jobs:
         with:
           context: .
           push: false
-          tags: chainql-mcp-server:test
+          tags: infura-mcp-mcp-server:test
           cache-from: type=gha
           cache-to: type=gha,mode=max
       # This requires username and password for docker login to be kept in secrets
       # - name: Test Docker image
       #   run: |
       #     # Start container
-      #     docker run -d --name chainql-test -p 3000:3000 \
+      #     docker run -d --name infura-mcp-test -p 3000:3000 \
       #       -e INFURA_API_KEY="${{ secrets.INFURA_API_KEY }}" \
-      #       chainql-mcp-server:test
+      #       infura-mcp-mcp-server:test
           
       #     # Wait for startup
       #     sleep 10
@@ -100,7 +100,7 @@ jobs:
       #     curl -f http://localhost:3000/health
           
       #     # Check logs
-      #     docker logs chainql-test
+      #     docker logs infura-mcp-test
           
       #     # Cleanup
-      #     docker stop chainql-test
+      #     docker stop infura-mcp-test

@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We as contributors and maintainers of **ChainQL** pledge to make participation in our
+We as contributors and maintainers of **infura-mcp** pledge to make participation in our
 community a harassment-free experience for everyone, regardless of age, body size,
 disability, ethnicity, sex characteristics, gender identity and expression, level of
 experience, education, socio-economic status, nationality, personal appearance,

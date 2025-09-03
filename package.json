@@ -1,7 +1,7 @@
 {
-  "name": "chainql",
+  "name": "infura-mcp",
   "version": "1.0.0",
-  "description": "A MCP server for interacting with blockchains",
+  "description": "A MCP server for interacting with blockchains via Infura APIs",
   "license": "MIT",
   "author": "Sumitesh Naithani",
   "type": "module",
@@ -27,7 +27,7 @@
     ]
   },
   "bin": {
-    "chainql": "dist/index.js"
+    "infura-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
