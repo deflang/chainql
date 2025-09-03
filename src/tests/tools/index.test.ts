@@ -1,6 +1,7 @@
 import { tools } from "../../tools";
 import { getAccounts } from "../../tools/getAccounts";
 import { getEthBalance } from "../../tools/getBalance.js";
+import { getBlobBaseFee } from "../../tools/getBlobBaseFee";
 import { getTransactionCount } from "../../tools/getTransactionCount.js";
 
 describe("tools module", () => {
@@ -12,10 +13,11 @@ describe("tools module", () => {
     expect(tools).toContain(getEthBalance);
     expect(tools).toContain(getTransactionCount);
     expect(tools).toContain(getAccounts);
+    expect(tools).toContain(getBlobBaseFee);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(3);
+    expect(tools).toHaveLength(4);
   });
 
   it("should have tools with correct names", () => {
