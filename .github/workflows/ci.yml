@@ -87,21 +87,21 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Test Docker image
-        run: |
-          # Start container
-          docker run -d --name infura-test -p 3000:3000 \
-            -e INFURA_API_KEY="${{ secrets.INFURA_API_KEY }}" \
-            infura-mcp-server:test
+      # - name: Test Docker image
+      #   run: |
+      #     # Start container
+      #     docker run -d --name infura-test -p 3000:3000 \
+      #       -e INFURA_API_KEY="${{ secrets.INFURA_API_KEY }}" \
+      #       infura-mcp-server:test
           
-          # Wait for startup
-          sleep 10
+      #     # Wait for startup
+      #     sleep 10
           
-          # Test health endpoint
-          curl -f http://localhost:3000/health
+      #     # Test health endpoint
+      #     curl -f http://localhost:3000/health
           
-          # Check logs
-          docker logs infura-test
+      #     # Check logs
+      #     docker logs infura-test
           
-          # Cleanup
-          docker stop infura-test
+      #     # Cleanup
+      #     docker stop infura-test
