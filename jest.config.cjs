@@ -18,9 +18,5 @@ module.exports = {
   moduleNameMapper: {
     "^(.*)\\.js$": "$1",
   },
-  globals: {
-    "ts-jest": {
-      useESM: true, // crucial for .js imports in ESM
-    },
-  },
+  setupFiles: ["<rootDir>/jest.env.js"],
 };
