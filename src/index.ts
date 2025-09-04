@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { ExpressHttpStreamableMcpServer } from "./server.js";
 import { tools } from "./tools/index.js";
 
