@@ -19,6 +19,7 @@ import { getTransactionReceipt } from "../../tools/getTransactionReceipt";
 import { getUncleByBlockHashAndIndex } from "../../tools/getUncleByBlockHashAndIndex";
 import { getUncleByBlockNumberAndIndex } from "../../tools/getUncleByBlockNumberAndIndex";
 import { getUncleCountByBlockHash } from "../../tools/getUncleCountByBlockHash";
+import { getUncleCountByBlockNumber } from "../../tools/getUncleCountByBlockNumber";
 import { getFeeHistory } from "../../tools/getFeeHistory";
 import { getGasEstimate } from "../../tools/getGasEstimate";
 import { getGasPrice } from "../../tools/getGasPrice";
@@ -54,10 +55,11 @@ describe("tools module", () => {
     expect(tools).toContainEqual(getUncleByBlockHashAndIndex);
     expect(tools).toContainEqual(getUncleByBlockNumberAndIndex);
     expect(tools).toContainEqual(getUncleCountByBlockHash);
+    expect(tools).toContainEqual(getUncleCountByBlockNumber);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(24);
+    expect(tools).toHaveLength(25);
   });
 
   it("should have tools with correct names", () => {

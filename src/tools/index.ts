@@ -22,6 +22,7 @@ import { getTransactionReceipt } from "./getTransactionReceipt.js";
 import { getUncleByBlockHashAndIndex } from "./getUncleByBlockHashAndIndex.js";
 import { getUncleByBlockNumberAndIndex } from "./getUncleByBlockNumberAndIndex.js";
 import { getUncleCountByBlockHash } from "./getUncleCountByBlockHash.js";
+import { getUncleCountByBlockNumber } from "./getUncleCountByBlockNumber.js";
 
 export const tools = [
   getEthBalance,
@@ -54,4 +55,6 @@ export const tools = [
   getUncleByBlockNumberAndIndex
   ,
   getUncleCountByBlockHash
+  ,
+  getUncleCountByBlockNumber
 ];
