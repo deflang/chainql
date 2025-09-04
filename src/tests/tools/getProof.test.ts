@@ -18,11 +18,9 @@ describe("getProof", () => {
     const mockResult = {
       address: address.toLowerCase(),
       balance: "0x0",
-      codeHash:
-        "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+      codeHash: "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
       nonce: "0x0",
-      storageHash:
-        "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+      storageHash: "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
       accountProof: ["0xabc"],
       storageProof: [
         {
@@ -33,13 +31,9 @@ describe("getProof", () => {
       ],
     };
 
-    const mockResponse = {
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce({
       json: async () => ({ result: mockResult }),
-    } as Response;
-
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    } as Response);
 
     const result = await getProof.handler({ address, storageKeys, block });
 
@@ -56,9 +50,7 @@ describe("getProof", () => {
   it("handles unsupported chain ID", async () => {
     const result = await getProof.handler({
       address: "0xabc",
-      storageKeys: [
-        "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
-      ],
+      storageKeys: ["0x1"],
       block: "latest",
       chainid: 9999,
     });
@@ -67,19 +59,13 @@ describe("getProof", () => {
   });
 
   it("handles RPC error response", async () => {
-    const mockResponse = {
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce({
       json: async () => ({ error: { message: "query timeout exceeded" } }),
-    } as Response;
-
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    } as Response);
 
     const result = await getProof.handler({
       address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
-      storageKeys: [
-        "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
-      ],
+      storageKeys: ["0x1"],
       block: "latest",
     });
 
@@ -89,37 +75,27 @@ describe("getProof", () => {
   });
 
   it("handles unknown RPC response (no result, no error)", async () => {
-    const mockResponse = {
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce({
       json: async () => ({}),
-    } as Response;
-
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    } as Response);
 
     const result = await getProof.handler({
       address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
-      storageKeys: [
-        "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
-      ],
+      storageKeys: ["0x1"],
       block: "latest",
     });
 
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching proof: Unknown error"
-    );
+    expect(result.content?.[0]?.text).toContain("Error fetching proof: Unknown error");
   });
 
-  it("handles network errors", async () => {
+  it("handles network errors (Error instance)", async () => {
     (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(
       new Error("Network down")
     );
 
     const result = await getProof.handler({
       address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
-      storageKeys: [
-        "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
-      ],
+      storageKeys: ["0x1"],
       block: "latest",
     });
 
@@ -127,6 +103,32 @@ describe("getProof", () => {
       "Error fetching proof: Network down"
     );
   });
+
+  it("handles network errors (string rejection)", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce("Network down string");
+
+    const result = await getProof.handler({
+      address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+      storageKeys: ["0x1"],
+      block: "latest",
+    });
+
+    expect(result.content?.[0]?.text).toContain(
+      "Error fetching proof: Network down string"
+    );
+  });
+
+  it("handles network errors (object rejection)", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({ code: 123 });
+
+    const result = await getProof.handler({
+      address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+      storageKeys: ["0x1"],
+      block: "latest",
+    });
+
+    expect(result.content?.[0]?.text).toContain(
+      'Error fetching proof: {"code":123}'
+    );
+  });
 });
-
-

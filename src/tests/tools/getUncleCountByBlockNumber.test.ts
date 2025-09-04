@@ -8,29 +8,35 @@ describe("getUncleCountByBlockNumber", () => {
     jest.clearAllMocks();
   });
 
-  it("fetches uncle count successfully", async () => {
+  it("fetches uncle count successfully with default chainid (1)", async () => {
     const blockNumberOrTag = "0x5bad55";
 
-    const mockResponse = {
-      json: async () => ({ result: "0x1" }),
-    } as Response;
+    const mockResponse = { json: async () => ({ result: "0x2" }) } as Response;
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag });
+
+    expect(result.content?.[0]?.text).toContain(
+      "Uncle count for block 0x5bad55 on chainid 1: 2 (hex: 0x2)"
     );
-
-    const result = await getUncleCountByBlockNumber.handler({
-      blockNumberOrTag,
-    });
-
-    expect(result.content?.[0]?.text).toContain("Uncle count for block");
-    expect(result.content?.[0]?.text).toContain("0x1");
     expect(fetch).toHaveBeenCalledWith(
       INFURA_CHAIN_URLS[1],
       expect.objectContaining({
-        body: expect.stringContaining("\"eth_getUncleCountByBlockNumber\""),
+        body: expect.stringContaining('"eth_getUncleCountByBlockNumber"'),
       })
     );
+  });
+
+  it("fetches uncle count successfully with a specific supported chainid", async () => {
+    const blockNumberOrTag = "0x5bad55";
+
+    const mockResponse = { json: async () => ({ result: "0x3" }) } as Response;
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
+
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag, chainid: 1 });
+
+    expect(result.content?.[0]?.text).toContain("3");
+    expect(result.content?.[0]?.text).toContain("hex: 0x3");
   });
 
   it("handles unsupported chain ID", async () => {
@@ -43,54 +49,63 @@ describe("getUncleCountByBlockNumber", () => {
   });
 
   it("handles RPC error response", async () => {
-    const mockResponse = {
-      json: async () => ({ error: { message: "block not found" } }),
-    } as Response;
+    const mockResponse = { json: async () => ({ error: { message: "block not found" } }) } as Response;
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x5bad55" });
 
-    const result = await getUncleCountByBlockNumber.handler({
-      blockNumberOrTag: "0x5bad55",
-    });
-
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching uncle count: block not found"
-    );
+    expect(result.content?.[0]?.text).toContain("Error fetching uncle count: block not found");
   });
 
   it("handles unknown RPC response (no result, no error)", async () => {
-    const mockResponse = {
-      json: async () => ({}),
-    } as Response;
+    const mockResponse = { json: async () => ({}) } as Response;
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x5bad55" });
 
-    const result = await getUncleCountByBlockNumber.handler({
-      blockNumberOrTag: "0x5bad55",
-    });
-
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching uncle count: Unknown error"
-    );
+    expect(result.content?.[0]?.text).toContain("Error fetching uncle count: Unknown error");
   });
 
   it("handles network errors", async () => {
-    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(
-      new Error("Network down")
-    );
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(new Error("Network down"));
 
-    const result = await getUncleCountByBlockNumber.handler({
-      blockNumberOrTag: "0x5bad55",
-    });
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x5bad55" });
 
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching uncle count: Network down"
-    );
+    expect(result.content?.[0]?.text).toContain("Error fetching uncle count: Network down");
   });
 });
 
+describe("getUncleCountByBlockNumber error handling variations", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it("handles Error objects correctly", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(new Error("Boom"));
+
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x123" });
+
+    expect(result.content?.[0]?.text).toContain("Boom");
+  });
+
+  it("handles string errors correctly", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockImplementationOnce(() => {
+      return Promise.reject("weird failure");
+    });
+
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x123" });
+
+    expect(result.content?.[0]?.text).toContain("weird failure");
+  });
+
+  it("handles unknown object errors correctly", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({
+      code: 500,
+      info: "internal",
+    });
+
+    const result = await getUncleCountByBlockNumber.handler({ blockNumberOrTag: "0x123" });
+
+    expect(result.content?.[0]?.text).toContain('{"code":500,"info":"internal"}');
+  });
+});

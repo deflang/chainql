@@ -23,6 +23,7 @@ import { getUncleByBlockHashAndIndex } from "./getUncleByBlockHashAndIndex.js";
 import { getUncleByBlockNumberAndIndex } from "./getUncleByBlockNumberAndIndex.js";
 import { getUncleCountByBlockHash } from "./getUncleCountByBlockHash.js";
 import { getUncleCountByBlockNumber } from "./getUncleCountByBlockNumber.js";
+import { getWork } from "./getWork.js";
 
 export const tools = [
   getEthBalance,
@@ -42,19 +43,13 @@ export const tools = [
   getLogs,
   getProof,
   getStorageAt,
-  getTransactionByBlockHashAndIndex
-  ,
-  getTransactionByBlockNumberAndIndex
-  ,
-  getTransactionByHash
-  ,
-  getTransactionReceipt
-  ,
-  getUncleByBlockHashAndIndex
-  ,
-  getUncleByBlockNumberAndIndex
-  ,
-  getUncleCountByBlockHash
-  ,
-  getUncleCountByBlockNumber
+  getTransactionByBlockHashAndIndex,
+  getTransactionByBlockNumberAndIndex,
+  getTransactionByHash,
+  getTransactionReceipt,
+  getUncleByBlockHashAndIndex,
+  getUncleByBlockNumberAndIndex,
+  getUncleCountByBlockHash,
+  getUncleCountByBlockNumber,
+  getWork
 ];

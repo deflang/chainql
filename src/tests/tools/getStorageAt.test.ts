@@ -4,43 +4,40 @@ import { INFURA_CHAIN_URLS } from "../../config/chains";
 global.fetch = jest.fn();
 
 describe("getStorageAt", () => {
+  const address = "0x295a70b2de5e3953354a6a8344e616ed314d7251";
+  const position = "0x0";
+  const block = "0x65a8db";
+
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("fetches storage value successfully", async () => {
-    const address = "0x295a70b2de5e3953354a6a8344e616ed314d7251";
-    const position = "0x0";
-    const block = "0x65a8db";
-
     const mockResponse = {
       json: async () => ({
-        result:
-          "0x00000000000000000000000000000000000000000000000000000000000004d2",
+        result: "0x00000000000000000000000000000000000000000000000000000000000004d2",
       }),
     } as Response;
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
     const result = await getStorageAt.handler({ address, position, block });
 
-    expect(result.content?.[0]?.text).toContain("Storage at 0x0 for");
-    expect(result.content?.[0]?.text).toContain("0x65a8db");
+    expect(result.content?.[0]?.text).toContain(`Storage at ${position} for ${address}`);
+    expect(result.content?.[0]?.text).toContain(block);
     expect(fetch).toHaveBeenCalledWith(
       INFURA_CHAIN_URLS[1],
       expect.objectContaining({
-        body: expect.stringContaining("\"eth_getStorageAt\""),
+        body: expect.stringContaining('"eth_getStorageAt"'),
       })
     );
   });
 
   it("handles unsupported chain ID", async () => {
     const result = await getStorageAt.handler({
-      address: "0xabc",
-      position: "0x0",
-      block: "latest",
+      address,
+      position,
+      block,
       chainid: 9999,
     });
 
@@ -52,12 +49,10 @@ describe("getStorageAt", () => {
       json: async () => ({ error: { message: "execution reverted" } }),
     } as Response;
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
     const result = await getStorageAt.handler({
-      address: "0x295a70b2de5e3953354a6a8344e616ed314d7251",
+      address,
       position: "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9",
       block: "latest",
     });
@@ -68,40 +63,28 @@ describe("getStorageAt", () => {
   });
 
   it("handles unknown RPC response (no result, no error)", async () => {
-    const mockResponse = {
-      json: async () => ({}),
-    } as Response;
+    const mockResponse = { json: async () => ({}) } as Response;
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
-      mockResponse
-    );
-
-    const result = await getStorageAt.handler({
-      address: "0x295a70b2de5e3953354a6a8344e616ed314d7251",
-      position: "0x0",
-      block: "latest",
-    });
-
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching storage: Unknown error"
-    );
+    const result = await getStorageAt.handler({ address, position, block: "latest" });
+    expect(result.content?.[0]?.text).toContain("Error fetching storage: Unknown error");
   });
 
-  it("handles network errors", async () => {
-    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(
-      new Error("Network down")
-    );
+  it("handles network errors (Error object)", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(new Error("Network down"));
+    const result = await getStorageAt.handler({ address, position, block: "latest" });
+    expect(result.content?.[0]?.text).toContain("Error fetching storage: Network down");
+  });
 
-    const result = await getStorageAt.handler({
-      address: "0x295a70b2de5e3953354a6a8344e616ed314d7251",
-      position: "0x0",
-      block: "latest",
-    });
+  it("handles network errors (string error)", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockImplementationOnce(() => Promise.reject("weird failure"));
+    const result = await getStorageAt.handler({ address, position, block: "latest" });
+    expect(result.content?.[0]?.text).toContain("weird failure");
+  });
 
-    expect(result.content?.[0]?.text).toContain(
-      "Error fetching storage: Network down"
-    );
+  it("handles network errors (unknown object)", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({ code: 500, info: "internal" });
+    const result = await getStorageAt.handler({ address, position, block: "latest" });
+    expect(result.content?.[0]?.text).toContain('{"code":500,"info":"internal"}');
   });
 });
-
-
