@@ -15,6 +15,10 @@ import { getStorageAt } from "../../tools/getStorageAt";
 import { getTransactionByBlockHashAndIndex } from "../../tools/getTransactionByBlockHashAndIndex";
 import { getTransactionByBlockNumberAndIndex } from "../../tools/getTransactionByBlockNumberAndIndex";
 import { getTransactionByHash } from "../../tools/getTransactionByHash";
+import { getTransactionReceipt } from "../../tools/getTransactionReceipt";
+import { getUncleByBlockHashAndIndex } from "../../tools/getUncleByBlockHashAndIndex";
+import { getUncleByBlockNumberAndIndex } from "../../tools/getUncleByBlockNumberAndIndex";
+import { getUncleCountByBlockHash } from "../../tools/getUncleCountByBlockHash";
 import { getFeeHistory } from "../../tools/getFeeHistory";
 import { getGasEstimate } from "../../tools/getGasEstimate";
 import { getGasPrice } from "../../tools/getGasPrice";
@@ -46,10 +50,14 @@ describe("tools module", () => {
     expect(tools).toContainEqual(getTransactionByBlockHashAndIndex);
     expect(tools).toContainEqual(getTransactionByBlockNumberAndIndex);
     expect(tools).toContainEqual(getTransactionByHash);
+    expect(tools).toContainEqual(getTransactionReceipt);
+    expect(tools).toContainEqual(getUncleByBlockHashAndIndex);
+    expect(tools).toContainEqual(getUncleByBlockNumberAndIndex);
+    expect(tools).toContainEqual(getUncleCountByBlockHash);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(20);
+    expect(tools).toHaveLength(24);
   });
 
   it("should have tools with correct names", () => {

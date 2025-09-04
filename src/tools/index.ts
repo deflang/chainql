@@ -18,6 +18,10 @@ import { getStorageAt } from "./getStorageAt.js";
 import { getTransactionByBlockHashAndIndex } from "./getTransactionByBlockHashAndIndex.js";
 import { getTransactionByBlockNumberAndIndex } from "./getTransactionByBlockNumberAndIndex.js";
 import { getTransactionByHash } from "./getTransactionByHash.js";
+import { getTransactionReceipt } from "./getTransactionReceipt.js";
+import { getUncleByBlockHashAndIndex } from "./getUncleByBlockHashAndIndex.js";
+import { getUncleByBlockNumberAndIndex } from "./getUncleByBlockNumberAndIndex.js";
+import { getUncleCountByBlockHash } from "./getUncleCountByBlockHash.js";
 
 export const tools = [
   getEthBalance,
@@ -42,4 +46,12 @@ export const tools = [
   getTransactionByBlockNumberAndIndex
   ,
   getTransactionByHash
+  ,
+  getTransactionReceipt
+  ,
+  getUncleByBlockHashAndIndex
+  ,
+  getUncleByBlockNumberAndIndex
+  ,
+  getUncleCountByBlockHash
 ];
