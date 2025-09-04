@@ -11,6 +11,7 @@ import { getBlockByNumber } from "./getBlockByNumber.js";
 import { getBlockReceipts } from "./getBlockReceipts.js";
 import { getBlockTransactionCountByHash } from "./getBlockTransactionCountByHash.js";
 import { getBlockTransactionCountByNumber } from "./getBlockTransactionCountByNumber.js";
+import { getCode } from "./getCode.js";
 
 export const tools = [
   getEthBalance,
@@ -25,5 +26,6 @@ export const tools = [
   getBlockByNumber,
   getBlockReceipts,
   getBlockTransactionCountByHash,
-  getBlockTransactionCountByNumber
+  getBlockTransactionCountByNumber,
+  getCode
 ];
