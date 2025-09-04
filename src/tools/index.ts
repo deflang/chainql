@@ -26,8 +26,12 @@ import { getUncleCountByBlockNumber } from "./getUncleCountByBlockNumber.js";
 import { getWork } from "./getWork.js";
 import { getHashrate } from "./getHashRate.js";
 import { getMaxPriorityFeePerGas } from "./getMaxPriorityFeePerGas.js";
+import { getMiningStatus } from "./getMiningStatus.js";
+import { getProtocolVersion } from "./getProtocolVersion.js";
+import { sendRawTransaction } from "./sendRawTransaction.js";
+import { WRITE_TOOLS_ENABLED } from "../config/chains.js";
 
-export const tools = [
+const read_only_tools = [
   getEthBalance,
   getTransactionCount,
   getAccounts,
@@ -55,5 +59,11 @@ export const tools = [
   getUncleCountByBlockNumber,
   getWork,
   getHashrate,
-  getMaxPriorityFeePerGas
+  getMaxPriorityFeePerGas,
+  getMiningStatus,
+  getProtocolVersion,
 ];
+
+export const tools = WRITE_TOOLS_ENABLED
+  ? [...read_only_tools, sendRawTransaction]
+  : read_only_tools;

@@ -4,7 +4,7 @@ import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
 export const getBlockNumber = {
-  name: "eth_block_number",
+  name: "eth_get_block_number",
   description:
     "Returns the latest block number on a specified EVM chain, defaulting to Ethereum mainnet.",
   schema: {

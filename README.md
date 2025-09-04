@@ -63,3 +63,5 @@ The following tools are available in infura-mcp:
 - `eth_get_work`
 - `eth_get_hashrate`
 - `eth_max_priority_fee_per_gas`
+- `eth_get_mining_status`
+- `eth_get_protocol_version`

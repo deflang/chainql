@@ -1,30 +1,30 @@
-import { getMaxPriorityFeePerGas } from "../../tools/getMaxPriorityFeePerGas";
+import { getMiningStatus } from "../../tools/getMiningStatus";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();
 
-describe("eth_maxPriorityFeePerGas", () => {
+describe("eth_mining", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it("fetches max priority fee successfully", async () => {
-    const mockResponse = { json: async () => ({ result: "0x55d4a80" }) } as Response;
+  it("fetches mining status successfully", async () => {
+    const mockResponse = { json: async () => ({ result: false }) } as Response;
 
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
 
-    expect(result.content?.[0]?.text).toContain("Max priority fee per gas on chainid 1");
-    expect(result.content?.[0]?.text).toContain("0x55d4a80");
+    expect(result.content?.[0]?.text).toContain("Mining status on chainid 1");
+    expect(result.content?.[0]?.text).toContain("false");
     expect(fetch).toHaveBeenCalledWith(
       INFURA_CHAIN_URLS[1],
-      expect.objectContaining({ body: expect.stringContaining('"eth_maxPriorityFeePerGas"') })
+      expect.objectContaining({ body: expect.stringContaining('"eth_mining"') })
     );
   });
 
   it("handles unsupported chain ID", async () => {
-    const result = await getMaxPriorityFeePerGas.handler({ chainid: 9999 });
+    const result = await getMiningStatus.handler({ chainid: 9999 });
     expect(result.content?.[0]?.text).toContain("Unsupported chain ID: 9999");
   });
 
@@ -32,9 +32,9 @@ describe("eth_maxPriorityFeePerGas", () => {
     const mockResponse = { json: async () => ({ error: { message: "RPC failed" } }) } as Response;
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
     expect(result.content?.[0]?.text).toContain(
-      "Error fetching max priority fee per gas: RPC failed"
+      "Error fetching mining status: RPC failed"
     );
   });
 
@@ -42,27 +42,27 @@ describe("eth_maxPriorityFeePerGas", () => {
     const mockResponse = { json: async () => ({}) } as Response;
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(mockResponse);
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
     expect(result.content?.[0]?.text).toContain(
-      "Error fetching max priority fee per gas: Unknown error"
+      "Error fetching mining status: Unknown error"
     );
   });
 
   it("handles network errors", async () => {
     (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(new Error("Network down"));
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
     expect(result.content?.[0]?.text).toContain(
-      "Error fetching max priority fee per gas: Network down"
+      "Error fetching mining status: Network down"
     );
   });
 
   it("handles non-Error thrown object", async () => {
     (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce("Unexpected failure");
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
     expect(result.content?.[0]?.text).toContain(
-      "Error fetching max priority fee per gas: Unexpected failure"
+      "Error fetching mining status: Unexpected failure"
     );
   });
 
@@ -72,7 +72,7 @@ describe("eth_maxPriorityFeePerGas", () => {
       info: "bad",
     });
 
-    const result = await getMaxPriorityFeePerGas.handler({});
+    const result = await getMiningStatus.handler({});
 
     expect(result.content?.[0]?.text).toContain('{"code":123,"info":"bad"}');
   });

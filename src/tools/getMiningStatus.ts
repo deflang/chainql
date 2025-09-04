@@ -3,10 +3,10 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types";
 import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
-export const getMaxPriorityFeePerGas = {
-  name: "eth_get_max_priority_fee_per_gas",
+export const getMiningStatus = {
+  name: "eth_get_mining_status",
   description:
-    "Returns an estimate of the priority fee (in wei) needed to be included in a block.",
+    "Returns true if the client is actively mining new blocks.",
   schema: {
     chainid: z
       .number()
@@ -25,17 +25,14 @@ export const getMaxPriorityFeePerGas = {
       if (!url) {
         return {
           content: [
-            {
-              type: "text",
-              text: `Unsupported chain ID: ${selectedChainId}`,
-            },
+            { type: "text", text: `Unsupported chain ID: ${selectedChainId}` },
           ],
         };
       }
 
       const body = {
         jsonrpc: "2.0",
-        method: "eth_maxPriorityFeePerGas",
+        method: "eth_mining",
         params: [],
         id: 1,
       };
@@ -48,12 +45,12 @@ export const getMaxPriorityFeePerGas = {
 
       const data: JsonRpcResponse = await res.json();
 
-      if (!data.result) {
+      if (typeof data.result !== "boolean") {
         return {
           content: [
             {
               type: "text",
-              text: `Error fetching max priority fee per gas: ${
+              text: `Error fetching mining status: ${
                 data.error?.message || "Unknown error"
               }`,
             },
@@ -65,7 +62,7 @@ export const getMaxPriorityFeePerGas = {
         content: [
           {
             type: "text",
-            text: `Max priority fee per gas on chainid ${selectedChainId}: ${data.result}`,
+            text: `Mining status on chainid ${selectedChainId}: ${data.result}`,
           },
         ],
       };
@@ -79,10 +76,7 @@ export const getMaxPriorityFeePerGas = {
 
       return {
         content: [
-          {
-            type: "text",
-            text: `Error fetching max priority fee per gas: ${message}`,
-          },
+          { type: "text", text: `Error fetching mining status: ${message}` },
         ],
       };
     }

@@ -3,19 +3,22 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types";
 import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
-export const getMaxPriorityFeePerGas = {
-  name: "eth_get_max_priority_fee_per_gas",
+export const sendRawTransaction = {
+  name: "eth_send_raw_transaction",
   description:
-    "Returns an estimate of the priority fee (in wei) needed to be included in a block.",
+    "Submits a pre-signed transaction for broadcast to the Ethereum network.",
   schema: {
+    signedTx: z.string().describe("Signed raw transaction data (hex string)"),
     chainid: z
       .number()
       .optional()
       .describe("EVM chain ID (default: 1 for Ethereum mainnet)"),
   },
   handler: async ({
+    signedTx,
     chainid,
   }: {
+    signedTx: string;
     chainid?: number;
   }): Promise<CallToolResult> => {
     try {
@@ -25,18 +28,15 @@ export const getMaxPriorityFeePerGas = {
       if (!url) {
         return {
           content: [
-            {
-              type: "text",
-              text: `Unsupported chain ID: ${selectedChainId}`,
-            },
+            { type: "text", text: `Unsupported chain ID: ${selectedChainId}` },
           ],
         };
       }
 
       const body = {
         jsonrpc: "2.0",
-        method: "eth_maxPriorityFeePerGas",
-        params: [],
+        method: "eth_sendRawTransaction",
+        params: [signedTx],
         id: 1,
       };
 
@@ -53,7 +53,7 @@ export const getMaxPriorityFeePerGas = {
           content: [
             {
               type: "text",
-              text: `Error fetching max priority fee per gas: ${
+              text: `Error sending raw transaction: ${
                 data.error?.message || "Unknown error"
               }`,
             },
@@ -65,7 +65,7 @@ export const getMaxPriorityFeePerGas = {
         content: [
           {
             type: "text",
-            text: `Max priority fee per gas on chainid ${selectedChainId}: ${data.result}`,
+            text: `Transaction broadcasted on chainid ${selectedChainId}: ${data.result}`,
           },
         ],
       };
@@ -81,7 +81,7 @@ export const getMaxPriorityFeePerGas = {
         content: [
           {
             type: "text",
-            text: `Error fetching max priority fee per gas: ${message}`,
+            text: `Error sending raw transaction: ${message}`,
           },
         ],
       };

@@ -71,4 +71,15 @@ describe("eth_hashrate", () => {
       'Error fetching hashrate: Something went wrong'
     );
   });
+
+  it("handles unknown object errors correctly", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({
+      code: 123,
+      info: "bad",
+    });
+
+    const result = await getHashrate.handler({});
+
+    expect(result.content?.[0]?.text).toContain('{"code":123,"info":"bad"}');
+  });
 });
