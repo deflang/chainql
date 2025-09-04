@@ -94,6 +94,49 @@ describe("getCode", () => {
       "Error fetching contract code: Network down"
     );
   });
+
+  it("calculates byteLength correctly for bytecode without 0x prefix", async () => {
+    const address = "0x1234567890123456789012345678901234567890";
+    const block = "latest";
+  
+    const mockResponse = {
+      json: async () => ({ result: "60606040" }), // no 0x
+    } as Response;
+  
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
+      mockResponse
+    );
+  
+    const result = await getCode.handler({ address, block });
+  
+    expect(result.content?.[0]?.text).toContain("Bytecode for");
+    expect(result.content?.[0]?.text).toContain("length 4 bytes"); // 60606040 => 4 bytes
+    expect(result.content?.[1]?.text).toBe("60606040");
+  });
+  
+  it("handles string error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce("String error");
+  
+    const result = await getCode.handler({
+      address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+      block: "latest",
+    });
+  
+    expect(result.content?.[0]?.text).toContain("Error fetching contract code: String error");
+  });
+  
+  it("handles unknown type error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({ some: "object" });
+  
+    const result = await getCode.handler({
+      address: "0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+      block: "latest",
+    });
+  
+    expect(result.content?.[0]?.text).toContain(
+      'Error fetching contract code: {"some":"object"}'
+    );
+  });  
 });
 
 

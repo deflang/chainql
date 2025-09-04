@@ -94,6 +94,34 @@ describe("getBlockTransactionCountByNumber", () => {
       "Error fetching block transaction count by number: Network down"
     );
   });
+
+  it("handles string error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(
+      "String error"
+    );
+  
+    const result = await getBlockTransactionCountByNumber.handler({
+      blockNumberOrTag: "0x10",
+    });
+  
+    expect(result.content?.[0]?.text).toContain(
+      "Error fetching block transaction count by number: String error"
+    );
+  });
+  
+  it("handles unknown type error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({
+      some: "object",
+    });
+  
+    const result = await getBlockTransactionCountByNumber.handler({
+      blockNumberOrTag: "0x10",
+    });
+  
+    expect(result.content?.[0]?.text).toContain(
+      'Error fetching block transaction count by number: {"some":"object"}'
+    );
+  });  
 });
 
 

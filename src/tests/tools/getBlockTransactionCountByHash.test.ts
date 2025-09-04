@@ -9,7 +9,8 @@ describe("getBlockTransactionCountByHash", () => {
   });
 
   it("fetches transaction count successfully", async () => {
-    const hash = "0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35";
+    const hash =
+      "0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35";
     const mockResponse = {
       json: async () => ({ result: "0x50" }),
     } as Response;
@@ -26,7 +27,7 @@ describe("getBlockTransactionCountByHash", () => {
     expect(fetch).toHaveBeenCalledWith(
       INFURA_CHAIN_URLS[1],
       expect.objectContaining({
-        body: expect.stringContaining("\"eth_getBlockTransactionCountByHash\""),
+        body: expect.stringContaining('"eth_getBlockTransactionCountByHash"'),
       })
     );
   });
@@ -89,6 +90,32 @@ describe("getBlockTransactionCountByHash", () => {
       "Error fetching block transaction count: Network down"
     );
   });
+
+  it("handles string error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce(
+      "String error"
+    );
+
+    const result = await getBlockTransactionCountByHash.handler({
+      hash: "0xabc",
+    });
+
+    expect(result.content?.[0]?.text).toContain(
+      "Error fetching block transaction count: String error"
+    );
+  });
+
+  it("handles unknown type error thrown in fetch", async () => {
+    (fetch as jest.MockedFunction<typeof fetch>).mockRejectedValueOnce({
+      some: "object",
+    });
+
+    const result = await getBlockTransactionCountByHash.handler({
+      hash: "0xabc",
+    });
+
+    expect(result.content?.[0]?.text).toContain(
+      'Error fetching block transaction count: {"some":"object"}'
+    );
+  });
 });
-
-
