@@ -73,3 +73,4 @@ The following tools are available in infura-mcp.
 - `eth_get_simulated_transactions`
 - `eth_submit_work`
 - `eth_get_sync_status`
+- `eth_get_web3_client_version`

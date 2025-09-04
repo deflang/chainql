@@ -33,6 +33,7 @@ import { WRITE_TOOLS_ENABLED } from "../config/chains.js";
 import { getSimulatedTransactions } from "./getSimulatedTransactions.js";
 import { submitWork } from "./submitWork.js";
 import { getSyncStatus } from "./getSyncStatus.js";
+import { getClientVersion } from './getClientVersion.js'
 
 const read_only_tools = [
   getEthBalance,
@@ -67,6 +68,7 @@ const read_only_tools = [
   getProtocolVersion,
   getSimulatedTransactions,
   getSyncStatus,
+  getClientVersion
 ];
 
 export const tools = WRITE_TOOLS_ENABLED

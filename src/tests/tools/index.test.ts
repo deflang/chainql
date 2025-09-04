@@ -34,6 +34,7 @@ import { sendRawTransaction } from "../../tools/sendRawTransaction";
 import { getSimulatedTransactions } from "../../tools/getSimulatedTransactions";
 import { submitWork } from "../../tools/submitWork";
 import { getSyncStatus } from "../../tools/getSyncStatus";
+import { getClientVersion } from "../../tools/getClientVersion";
 
 describe("tools module", () => {
   it("should export an array", () => {
@@ -74,6 +75,7 @@ describe("tools module", () => {
     expect(tools).toContain(getSimulatedTransactions);
     expect(tools).toContain(submitWork);
     expect(tools).toContain(getSyncStatus);
+    expect(tools).toContain(getClientVersion);
   });
 
   it("should have tools with correct names", () => {
