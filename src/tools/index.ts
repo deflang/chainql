@@ -5,6 +5,7 @@ import { getBlobBaseFee } from "./getBlobBaseFee.js";
 import { getBlockNumber } from "./getBlockNumber.js";
 import { getGasEstimate } from "./getGasEstimate.js";
 import { getFeeHistory } from "./getFeeHistory.js";
+import { getGasPrice } from "./getGasPrice.js";
 
 export const tools = [
   getEthBalance,
@@ -13,5 +14,6 @@ export const tools = [
   getBlobBaseFee,
   getBlockNumber,
   getGasEstimate,
-  getFeeHistory
+  getFeeHistory,
+  getGasPrice
 ];
