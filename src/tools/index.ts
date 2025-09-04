@@ -16,6 +16,8 @@ import { getLogs } from "./getLogs.js";
 import { getProof } from "./getProof.js";
 import { getStorageAt } from "./getStorageAt.js";
 import { getTransactionByBlockHashAndIndex } from "./getTransactionByBlockHashAndIndex.js";
+import { getTransactionByBlockNumberAndIndex } from "./getTransactionByBlockNumberAndIndex.js";
+import { getTransactionByHash } from "./getTransactionByHash.js";
 
 export const tools = [
   getEthBalance,
@@ -36,4 +38,8 @@ export const tools = [
   getProof,
   getStorageAt,
   getTransactionByBlockHashAndIndex
+  ,
+  getTransactionByBlockNumberAndIndex
+  ,
+  getTransactionByHash
 ];
