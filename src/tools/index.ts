@@ -30,6 +30,7 @@ import { getMiningStatus } from "./getMiningStatus.js";
 import { getProtocolVersion } from "./getProtocolVersion.js";
 import { sendRawTransaction } from "./sendRawTransaction.js";
 import { WRITE_TOOLS_ENABLED } from "../config/chains.js";
+import { getSimulatedTransactions } from "./getSimulatedTransactions.js";
 
 const read_only_tools = [
   getEthBalance,
@@ -62,6 +63,7 @@ const read_only_tools = [
   getMaxPriorityFeePerGas,
   getMiningStatus,
   getProtocolVersion,
+  getSimulatedTransactions
 ];
 
 export const tools = WRITE_TOOLS_ENABLED

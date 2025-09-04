@@ -33,11 +33,11 @@ npm run dev
 
 ## Available Tools
 
-The following tools are available in infura-mcp.
-
 Note :
 1. All the read only tools are prefixed with **get** while remaining are write tools.
 2. **write tools** are disabled by default but can be enabled by setting **ENABLE_WRITE_TOOLS=false** in the env
+
+The following tools are available in infura-mcp.
 
 - `eth_get_accounts`
 - `eth_get_balance`
@@ -70,3 +70,4 @@ Note :
 - `eth_get_mining_status`
 - `eth_get_protocol_version`
 - `eth_send_raw_transaction`
+- `eth_get_simulated_transactions`
