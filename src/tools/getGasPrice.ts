@@ -4,7 +4,7 @@ import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
 export const getGasPrice = {
-  name: "eth_gas_price",
+  name: "eth_get_gas_price",
   description:
     "Retrieve the current gas price in wei. Defaults to Ethereum mainnet if no chain is specified.",
   schema: {
