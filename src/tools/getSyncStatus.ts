@@ -3,26 +3,19 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types";
 import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
-export const getBlockReceipts = {
-  name: "eth_get_block_receipts",
+export const getSyncStatus = {
+  name: "eth_get_sync_status",
   description:
-    "Retrieve all transaction receipts for a given block, including gas used and event logs. Defaults to Ethereum mainnet if no chain is specified.",
+    "Returns the sync status of the Ethereum node. Returns false if not syncing.",
   schema: {
-    blockNumber: z
-      .string()
-      .describe(
-        "Hexadecimal block number (e.g., 0x5BAD55) or tag: latest, earliest, pending, safe, finalized"
-      ),
     chainid: z
       .number()
       .optional()
       .describe("EVM chain ID (default: 1 for Ethereum mainnet)"),
   },
   handler: async ({
-    blockNumber,
     chainid,
   }: {
-    blockNumber: string;
     chainid?: number;
   }): Promise<CallToolResult> => {
     try {
@@ -39,8 +32,8 @@ export const getBlockReceipts = {
 
       const body = {
         jsonrpc: "2.0",
-        method: "eth_getBlockReceipts",
-        params: [blockNumber],
+        method: "eth_syncing",
+        params: [],
         id: 1,
       };
 
@@ -52,12 +45,12 @@ export const getBlockReceipts = {
 
       const data: JsonRpcResponse = await res.json();
 
-      if (!data.result || !Array.isArray(data.result)) {
+      if (data.result === undefined) {
         return {
           content: [
             {
               type: "text",
-              text: `Error fetching block receipts: ${
+              text: `Error fetching sync status: ${
                 data.error?.message || "Unknown error"
               }`,
             },
@@ -69,11 +62,7 @@ export const getBlockReceipts = {
         content: [
           {
             type: "text",
-            text: `Block receipts (chainid ${selectedChainId}): ${JSON.stringify(
-              data.result,
-              null,
-              2
-            )}`,
+            text: `Node sync status: ${data.result}`,
           },
         ],
       };
@@ -87,7 +76,7 @@ export const getBlockReceipts = {
 
       return {
         content: [
-          { type: "text", text: `Error fetching block receipts: ${message}` },
+          { type: "text", text: `Error fetching sync status: ${message}` },
         ],
       };
     }

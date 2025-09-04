@@ -35,7 +35,7 @@ npm run dev
 
 Note :
 1. All the read only tools are prefixed with **get** while remaining are write tools.
-2. **write tools** are disabled by default but can be enabled by setting **ENABLE_WRITE_TOOLS=false** in the env
+2. **write tools** are disabled by default but can be enabled by setting **WRITE_TOOLS_ENABLED=false** in the env
 
 The following tools are available in infura-mcp.
 

@@ -3,26 +3,30 @@ import { CallToolResult } from "@modelcontextprotocol/sdk/types";
 import { INFURA_CHAIN_URLS } from "../config/chains.js";
 import { JsonRpcResponse } from "../types/rpc.js";
 
-export const getBlockReceipts = {
-  name: "eth_get_block_receipts",
+export const submitWork = {
+  name: "eth_submit_work",
   description:
-    "Retrieve all transaction receipts for a given block, including gas used and event logs. Defaults to Ethereum mainnet if no chain is specified.",
+    "Submit a proof-of-work solution. Returns true if the solution is valid, false otherwise.",
   schema: {
-    blockNumber: z
+    nonce: z.string().describe("The nonce found (8 bytes, hex string)"),
+    powHash: z
       .string()
-      .describe(
-        "Hexadecimal block number (e.g., 0x5BAD55) or tag: latest, earliest, pending, safe, finalized"
-      ),
+      .describe("The header's PoW-hash (32 bytes, hex string)"),
+    mixDigest: z.string().describe("The mix digest (32 bytes, hex string)"),
     chainid: z
       .number()
       .optional()
       .describe("EVM chain ID (default: 1 for Ethereum mainnet)"),
   },
   handler: async ({
-    blockNumber,
+    nonce,
+    powHash,
+    mixDigest,
     chainid,
   }: {
-    blockNumber: string;
+    nonce: string;
+    powHash: string;
+    mixDigest: string;
     chainid?: number;
   }): Promise<CallToolResult> => {
     try {
@@ -39,8 +43,8 @@ export const getBlockReceipts = {
 
       const body = {
         jsonrpc: "2.0",
-        method: "eth_getBlockReceipts",
-        params: [blockNumber],
+        method: "eth_submitWork",
+        params: [nonce, powHash, mixDigest],
         id: 1,
       };
 
@@ -52,12 +56,12 @@ export const getBlockReceipts = {
 
       const data: JsonRpcResponse = await res.json();
 
-      if (!data.result || !Array.isArray(data.result)) {
+      if (typeof data.result !== "boolean") {
         return {
           content: [
             {
               type: "text",
-              text: `Error fetching block receipts: ${
+              text: `Error submitting work: ${
                 data.error?.message || "Unknown error"
               }`,
             },
@@ -69,11 +73,7 @@ export const getBlockReceipts = {
         content: [
           {
             type: "text",
-            text: `Block receipts (chainid ${selectedChainId}): ${JSON.stringify(
-              data.result,
-              null,
-              2
-            )}`,
+            text: `Work submission valid: ${data.result}`,
           },
         ],
       };
@@ -86,9 +86,7 @@ export const getBlockReceipts = {
           : JSON.stringify(err);
 
       return {
-        content: [
-          { type: "text", text: `Error fetching block receipts: ${message}` },
-        ],
+        content: [{ type: "text", text: `Error submitting work: ${message}` }],
       };
     }
   },

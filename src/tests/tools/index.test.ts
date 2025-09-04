@@ -32,6 +32,8 @@ import { getMiningStatus } from "../../tools/getMiningStatus";
 import { getProtocolVersion } from "../../tools/getProtocolVersion";
 import { sendRawTransaction } from "../../tools/sendRawTransaction";
 import { getSimulatedTransactions } from "../../tools/getSimulatedTransactions";
+import { submitWork } from "../../tools/submitWork";
+import { getSyncStatus } from "../../tools/getSyncStatus";
 
 describe("tools module", () => {
   it("should export an array", () => {
@@ -70,6 +72,8 @@ describe("tools module", () => {
     expect(tools).toContain(getMiningStatus);
     expect(tools).toContain(getProtocolVersion);
     expect(tools).toContain(getSimulatedTransactions);
+    expect(tools).toContain(submitWork);
+    expect(tools).toContain(getSyncStatus);
   });
 
   it("should have tools with correct names", () => {
