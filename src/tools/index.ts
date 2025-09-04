@@ -6,6 +6,7 @@ import { getBlockNumber } from "./getBlockNumber.js";
 import { getGasEstimate } from "./getGasEstimate.js";
 import { getFeeHistory } from "./getFeeHistory.js";
 import { getGasPrice } from "./getGasPrice.js";
+import { getBlockByHash } from "./getBlockByHash.js";
 
 export const tools = [
   getEthBalance,
@@ -15,5 +16,6 @@ export const tools = [
   getBlockNumber,
   getGasEstimate,
   getFeeHistory,
-  getGasPrice
+  getGasPrice,
+  getBlockByHash
 ];
