@@ -3,6 +3,7 @@ import { getAccounts } from "../../tools/getAccounts";
 import { getEthBalance } from "../../tools/getBalance.js";
 import { getBlobBaseFee } from "../../tools/getBlobBaseFee";
 import { getBlockByHash } from "../../tools/getBlockByHash";
+import { getBlockByNumber } from "../../tools/getBlockByNumber";
 import { getBlockNumber } from "../../tools/getBlockNumber";
 import { getFeeHistory } from "../../tools/getFeeHistory";
 import { getGasEstimate } from "../../tools/getGasEstimate";
@@ -24,10 +25,11 @@ describe("tools module", () => {
     expect(tools).toContainEqual(getFeeHistory);
     expect(tools).toContainEqual(getGasPrice);
     expect(tools).toContainEqual(getBlockByHash);
+    expect(tools).toContainEqual(getBlockByNumber);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(9);
+    expect(tools).toHaveLength(10);
   });
 
   it("should have tools with correct names", () => {
