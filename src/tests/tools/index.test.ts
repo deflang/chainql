@@ -12,6 +12,7 @@ import { getCode } from "../../tools/getCode";
 import { getLogs } from "../../tools/getLogs";
 import { getProof } from "../../tools/getProof";
 import { getStorageAt } from "../../tools/getStorageAt";
+import { getTransactionByBlockHashAndIndex } from "../../tools/getTransactionByBlockHashAndIndex";
 import { getFeeHistory } from "../../tools/getFeeHistory";
 import { getGasEstimate } from "../../tools/getGasEstimate";
 import { getGasPrice } from "../../tools/getGasPrice";
@@ -40,10 +41,11 @@ describe("tools module", () => {
     expect(tools).toContainEqual(getLogs);
     expect(tools).toContainEqual(getProof);
     expect(tools).toContainEqual(getStorageAt);
+    expect(tools).toContainEqual(getTransactionByBlockHashAndIndex);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(17);
+    expect(tools).toHaveLength(18);
   });
 
   it("should have tools with correct names", () => {
