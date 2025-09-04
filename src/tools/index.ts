@@ -13,6 +13,7 @@ import { getBlockTransactionCountByHash } from "./getBlockTransactionCountByHash
 import { getBlockTransactionCountByNumber } from "./getBlockTransactionCountByNumber.js";
 import { getCode } from "./getCode.js";
 import { getLogs } from "./getLogs.js";
+import { getProof } from "./getProof.js";
 
 export const tools = [
   getEthBalance,
@@ -29,5 +30,6 @@ export const tools = [
   getBlockTransactionCountByHash,
   getBlockTransactionCountByNumber,
   getCode,
-  getLogs
+  getLogs,
+  getProof
 ];
