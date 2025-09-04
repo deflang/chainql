@@ -24,6 +24,8 @@ import { getUncleByBlockNumberAndIndex } from "./getUncleByBlockNumberAndIndex.j
 import { getUncleCountByBlockHash } from "./getUncleCountByBlockHash.js";
 import { getUncleCountByBlockNumber } from "./getUncleCountByBlockNumber.js";
 import { getWork } from "./getWork.js";
+import { getHashrate } from "./getHashRate.js";
+import { getMaxPriorityFeePerGas } from "./getMaxPriorityFeePerGas.js";
 
 export const tools = [
   getEthBalance,
@@ -51,5 +53,7 @@ export const tools = [
   getUncleByBlockNumberAndIndex,
   getUncleCountByBlockHash,
   getUncleCountByBlockNumber,
-  getWork
+  getWork,
+  getHashrate,
+  getMaxPriorityFeePerGas
 ];

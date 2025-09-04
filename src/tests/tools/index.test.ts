@@ -25,6 +25,8 @@ import { getGasEstimate } from "../../tools/getGasEstimate";
 import { getGasPrice } from "../../tools/getGasPrice";
 import { getTransactionCount } from "../../tools/getTransactionCount.js";
 import { getWork } from "../../tools/getWork";
+import { getHashrate } from "../../tools/getHashRate";
+import { getMaxPriorityFeePerGas } from "../../tools/getMaxPriorityFeePerGas";
 
 describe("tools module", () => {
   it("should export an array", () => {
@@ -58,10 +60,12 @@ describe("tools module", () => {
     expect(tools).toContainEqual(getUncleCountByBlockHash);
     expect(tools).toContainEqual(getUncleCountByBlockNumber);
     expect(tools).toContainEqual(getWork);
+    expect(tools).toContainEqual(getHashrate);
+    expect(tools).toContainEqual(getMaxPriorityFeePerGas);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(26);
+    expect(tools).toHaveLength(28);
   });
 
   it("should have tools with correct names", () => {

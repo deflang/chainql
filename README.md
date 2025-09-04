@@ -28,3 +28,38 @@ npm install
 ```bash
 npm run dev
 ```
+
+---
+
+## Available Tools
+
+The following tools are available in infura-mcp:
+
+- `eth_get_accounts`
+- `eth_get_balance`
+- `eth_get_blob_base_fee`
+- `eth_get_block_by_hash`
+- `eth_get_block_by_number`
+- `eth_get_block_number`
+- `eth_get_block_receipts`
+- `eth_get_block_transaction_count_by_hash`
+- `eth_get_block_transaction_count_by_number`
+- `eth_get_code`
+- `eth_get_fee_history`
+- `eth_get_gas_estimate`
+- `eth_get_gas_price`
+- `eth_get_logs`
+- `eth_get_proof`
+- `eth_get_storage_at`
+- `eth_get_transaction_by_block_hash_and_index`
+- `eth_get_transaction_by_block_number_and_index`
+- `eth_get_transaction_by_hash`
+- `eth_get_transaction_count`
+- `eth_get_transaction_receipt`
+- `eth_get_uncle_by_block_hash_and_index`
+- `eth_get_uncle_by_block_number_and_index`
+- `eth_get_uncle_count_by_block_hash`
+- `eth_get_uncle_count_by_block_number`
+- `eth_get_work`
+- `eth_get_hashrate`
+- `eth_max_priority_fee_per_gas`
