@@ -3,6 +3,7 @@ import { getAccounts } from "../../tools/getAccounts";
 import { getEthBalance } from "../../tools/getBalance.js";
 import { getBlobBaseFee } from "../../tools/getBlobBaseFee";
 import { getBlockNumber } from "../../tools/getBlockNumber";
+import { getFeeHistory } from "../../tools/getFeeHistory";
 import { getGasEstimate } from "../../tools/getGasEstimate";
 import { getTransactionCount } from "../../tools/getTransactionCount.js";
 
@@ -18,10 +19,11 @@ describe("tools module", () => {
     expect(tools).toContain(getBlobBaseFee);
     expect(tools).toContainEqual(getBlockNumber);
     expect(tools).toContainEqual(getGasEstimate);
+    expect(tools).toContainEqual(getFeeHistory);
   });
 
   it("should have the correct length", () => {
-    expect(tools).toHaveLength(6);
+    expect(tools).toHaveLength(7);
   });
 
   it("should have tools with correct names", () => {
