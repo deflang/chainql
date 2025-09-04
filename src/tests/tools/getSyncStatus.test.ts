@@ -16,8 +16,6 @@ describe("getSyncStatus tool", () => {
     expect(result.content?.[0]?.text).toBe("Node sync status: false");
   });
 
-  
-
   it("handles unsupported chain ID", async () => {
     const result = await getSyncStatus.handler({ chainid: 9999 });
     expect(result.content?.[0]?.text).toContain("Unsupported chain ID: 9999");
