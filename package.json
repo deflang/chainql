@@ -4,6 +4,8 @@
   "description": "A MCP server for interacting with blockchains via Infura APIs",
   "license": "MIT",
   "author": "Sumitesh Naithani",
+  "repository": "https://github.com/deflang/infura-mcp",
+  "homepage": "https://github.com/deflang/infura-mcp#readme",
   "type": "module",
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

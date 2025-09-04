@@ -34,6 +34,7 @@ npm run dev
 ## Available Tools
 
 Note :
+
 1. All the read only tools are prefixed with **get** while remaining are write tools.
 2. **write tools** are disabled by default but can be enabled by setting **WRITE_TOOLS_ENABLED=true** in the env
 
@@ -75,6 +76,33 @@ The following tools are available in infura-mcp.
 - `eth_get_sync_status`
 - `eth_get_web3_client_version`
 
-### Server description
+## Server description
+
 - ✅ HTTP streaming support
 - ✅ Docker containerization
+
+## Usage with Claude Desktop
+
+```json
+{
+  "mcpServers": {
+    "everything": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "infura-mcp"
+      ],
+      "env": {
+        "INFURA_API_KEY": "your-api-key-here"
+        "WRITE_TOOLS_ENABLED": false
+      }
+    }
+  }
+}
+```
+
+## Usage with Docker
+
+```json
+
+```
