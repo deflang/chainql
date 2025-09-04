@@ -103,6 +103,22 @@ The following tools are available in infura-mcp.
 
 ## Usage with Docker
 
-```json
+1. For linux platform
 
+```bash
+docker run --platform linux/amd64 -d \
+  --name infura-mcp-server \
+  -p 3000:3000 \
+  -e INFURA_API_KEY="your-infura-api-key" \
+  sumiteshn/infura-mcp:latest
+```
+
+2. For non-linux platform
+
+```bash
+docker run -d \
+  --name infura-mcp-server \
+  -p 3000:3000 \
+  -e INFURA_API_KEY="your-infura-api-key" \
+  sumiteshn/infura-mcp:latest
 ```
