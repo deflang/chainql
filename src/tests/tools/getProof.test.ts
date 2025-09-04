@@ -1,4 +1,4 @@
-import { getProof } from "../../tools/getProof";
+import { getProof } from "../../tools/ethereum/getProof";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

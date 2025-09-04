@@ -1,4 +1,4 @@
-import { getTransactionByHash } from "../../tools/getTransactionByHash";
+import { getTransactionByHash } from "../../tools/ethereum/getTransactionByHash";
 
 global.fetch = jest.fn();
 

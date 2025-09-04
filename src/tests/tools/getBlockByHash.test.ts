@@ -1,4 +1,4 @@
-import { getBlockByHash } from "../../tools/getBlockByHash";
+import { getBlockByHash } from "../../tools/ethereum/getBlockByHash";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

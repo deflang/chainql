@@ -1,4 +1,4 @@
-import { getStorageAt } from "../../tools/getStorageAt";
+import { getStorageAt } from "../../tools/ethereum/getStorageAt";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

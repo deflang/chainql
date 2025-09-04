@@ -1,4 +1,4 @@
-import { getSimulatedTransactions } from "../../tools/getSimulatedTransactions";
+import { getSimulatedTransactions } from "../../tools/ethereum/getSimulatedTransactions";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 type BlockStateCall = Parameters<

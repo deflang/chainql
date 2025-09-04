@@ -1,4 +1,4 @@
-import { getUncleCountByBlockNumber } from "../../tools/getUncleCountByBlockNumber";
+import { getUncleCountByBlockNumber } from "../../tools/ethereum/getUncleCountByBlockNumber";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

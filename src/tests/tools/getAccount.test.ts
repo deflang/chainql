@@ -1,4 +1,4 @@
-import { getAccounts } from "../../tools/getAccounts";
+import { getAccounts } from "../../tools/ethereum/getAccounts";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

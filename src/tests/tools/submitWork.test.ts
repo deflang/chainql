@@ -1,4 +1,4 @@
-import { submitWork } from "../../tools/submitWork";
+import { submitWork } from "../../tools/ethereum/submitWork";
 
 global.fetch = jest.fn();
 

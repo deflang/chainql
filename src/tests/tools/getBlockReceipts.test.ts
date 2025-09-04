@@ -1,4 +1,4 @@
-import { getBlockReceipts } from "../../tools/getBlockReceipts";
+import { getBlockReceipts } from "../../tools/ethereum/getBlockReceipts";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

@@ -1,4 +1,4 @@
-import { getProtocolVersion } from "../../tools/getProtocolVersion";
+import { getProtocolVersion } from "../../tools/ethereum/getProtocolVersion";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

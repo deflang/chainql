@@ -1,4 +1,4 @@
-import { getBlockNumber } from "../../tools/getBlockNumber";
+import { getBlockNumber } from "../../tools/ethereum/getBlockNumber";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

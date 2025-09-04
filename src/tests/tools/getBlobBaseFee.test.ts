@@ -1,4 +1,4 @@
-import { getBlobBaseFee } from "../../tools/getBlobBaseFee";
+import { getBlobBaseFee } from "../../tools/ethereum/getBlobBaseFee";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

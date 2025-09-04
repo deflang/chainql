@@ -1,4 +1,4 @@
-import { sendRawTransaction } from "../../tools/sendRawTransaction";
+import { sendRawTransaction } from "../../tools/ethereum/sendRawTransaction";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

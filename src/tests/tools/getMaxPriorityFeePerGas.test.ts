@@ -1,4 +1,4 @@
-import { getMaxPriorityFeePerGas } from "../../tools/getMaxPriorityFeePerGas";
+import { getMaxPriorityFeePerGas } from "../../tools/ethereum/getMaxPriorityFeePerGas";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

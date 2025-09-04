@@ -1,4 +1,4 @@
-import { getMiningStatus } from "../../tools/getMiningStatus";
+import { getMiningStatus } from "../../tools/ethereum/getMiningStatus";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

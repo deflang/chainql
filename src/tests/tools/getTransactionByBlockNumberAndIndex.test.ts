@@ -1,4 +1,4 @@
-import { getTransactionByBlockNumberAndIndex } from "../../tools/getTransactionByBlockNumberAndIndex";
+import { getTransactionByBlockNumberAndIndex } from "../../tools/ethereum/getTransactionByBlockNumberAndIndex";
 
 global.fetch = jest.fn();
 

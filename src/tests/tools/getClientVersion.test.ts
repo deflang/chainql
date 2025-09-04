@@ -1,4 +1,4 @@
-import { getClientVersion } from "../../tools/getClientVersion";
+import { getClientVersion } from "../../tools/ethereum/getClientVersion";
 
 global.fetch = jest.fn();
 

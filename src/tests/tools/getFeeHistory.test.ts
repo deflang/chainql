@@ -1,4 +1,4 @@
-import { getFeeHistory } from "../../tools/getFeeHistory";
+import { getFeeHistory } from "../../tools/ethereum/getFeeHistory";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

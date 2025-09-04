@@ -1,4 +1,4 @@
-import { getHashrate } from "../../tools/getHashRate";
+import { getHashrate } from "../../tools/ethereum/getHashRate";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

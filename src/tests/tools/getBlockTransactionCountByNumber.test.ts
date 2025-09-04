@@ -1,4 +1,4 @@
-import { getBlockTransactionCountByNumber } from "../../tools/getBlockTransactionCountByNumber";
+import { getBlockTransactionCountByNumber } from "../../tools/ethereum/getBlockTransactionCountByNumber";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

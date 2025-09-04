@@ -1,39 +1,39 @@
-import { getAccounts } from "./getAccounts.js";
-import { getEthBalance } from "./getBalance.js";
-import { getTransactionCount } from "./getTransactionCount.js";
-import { getBlobBaseFee } from "./getBlobBaseFee.js";
-import { getBlockNumber } from "./getBlockNumber.js";
-import { getGasEstimate } from "./getGasEstimate.js";
-import { getFeeHistory } from "./getFeeHistory.js";
-import { getGasPrice } from "./getGasPrice.js";
-import { getBlockByHash } from "./getBlockByHash.js";
-import { getBlockByNumber } from "./getBlockByNumber.js";
-import { getBlockReceipts } from "./getBlockReceipts.js";
-import { getBlockTransactionCountByHash } from "./getBlockTransactionCountByHash.js";
-import { getBlockTransactionCountByNumber } from "./getBlockTransactionCountByNumber.js";
-import { getCode } from "./getCode.js";
-import { getLogs } from "./getLogs.js";
-import { getProof } from "./getProof.js";
-import { getStorageAt } from "./getStorageAt.js";
-import { getTransactionByBlockHashAndIndex } from "./getTransactionByBlockHashAndIndex.js";
-import { getTransactionByBlockNumberAndIndex } from "./getTransactionByBlockNumberAndIndex.js";
-import { getTransactionByHash } from "./getTransactionByHash.js";
-import { getTransactionReceipt } from "./getTransactionReceipt.js";
-import { getUncleByBlockHashAndIndex } from "./getUncleByBlockHashAndIndex.js";
-import { getUncleByBlockNumberAndIndex } from "./getUncleByBlockNumberAndIndex.js";
-import { getUncleCountByBlockHash } from "./getUncleCountByBlockHash.js";
-import { getUncleCountByBlockNumber } from "./getUncleCountByBlockNumber.js";
-import { getWork } from "./getWork.js";
-import { getHashrate } from "./getHashRate.js";
-import { getMaxPriorityFeePerGas } from "./getMaxPriorityFeePerGas.js";
-import { getMiningStatus } from "./getMiningStatus.js";
-import { getProtocolVersion } from "./getProtocolVersion.js";
-import { sendRawTransaction } from "./sendRawTransaction.js";
+import { getAccounts } from "./ethereum/getAccounts.js";
+import { getEthBalance } from "./ethereum/getBalance.js";
+import { getTransactionCount } from "./ethereum/getTransactionCount.js";
+import { getBlobBaseFee } from "./ethereum/getBlobBaseFee.js";
+import { getBlockNumber } from "./ethereum/getBlockNumber.js";
+import { getGasEstimate } from "./ethereum/getGasEstimate.js";
+import { getFeeHistory } from "./ethereum/getFeeHistory.js";
+import { getGasPrice } from "./ethereum/getGasPrice.js";
+import { getBlockByHash } from "./ethereum/getBlockByHash.js";
+import { getBlockByNumber } from "./ethereum/getBlockByNumber.js";
+import { getBlockReceipts } from "./ethereum/getBlockReceipts.js";
+import { getBlockTransactionCountByHash } from "./ethereum/getBlockTransactionCountByHash.js";
+import { getBlockTransactionCountByNumber } from "./ethereum/getBlockTransactionCountByNumber.js";
+import { getCode } from "./ethereum/getCode.js";
+import { getLogs } from "./ethereum/getLogs.js";
+import { getProof } from "./ethereum/getProof.js";
+import { getStorageAt } from "./ethereum/getStorageAt.js";
+import { getTransactionByBlockHashAndIndex } from "./ethereum/getTransactionByBlockHashAndIndex.js";
+import { getTransactionByBlockNumberAndIndex } from "./ethereum/getTransactionByBlockNumberAndIndex.js";
+import { getTransactionByHash } from "./ethereum/getTransactionByHash.js";
+import { getTransactionReceipt } from "./ethereum/getTransactionReceipt.js";
+import { getUncleByBlockHashAndIndex } from "./ethereum/getUncleByBlockHashAndIndex.js";
+import { getUncleByBlockNumberAndIndex } from "./ethereum/getUncleByBlockNumberAndIndex.js";
+import { getUncleCountByBlockHash } from "./ethereum/getUncleCountByBlockHash.js";
+import { getUncleCountByBlockNumber } from "./ethereum/getUncleCountByBlockNumber.js";
+import { getWork } from "./ethereum/getWork.js";
+import { getHashrate } from "./ethereum/getHashRate.js";
+import { getMaxPriorityFeePerGas } from "./ethereum/getMaxPriorityFeePerGas.js";
+import { getMiningStatus } from "./ethereum/getMiningStatus.js";
+import { getProtocolVersion } from "./ethereum/getProtocolVersion.js";
+import { sendRawTransaction } from "./ethereum/sendRawTransaction.js";
 import { WRITE_TOOLS_ENABLED } from "../config/chains.js";
-import { getSimulatedTransactions } from "./getSimulatedTransactions.js";
-import { submitWork } from "./submitWork.js";
-import { getSyncStatus } from "./getSyncStatus.js";
-import { getClientVersion } from './getClientVersion.js'
+import { getSimulatedTransactions } from "./ethereum/getSimulatedTransactions.js";
+import { submitWork } from "./ethereum/submitWork.js";
+import { getSyncStatus } from "./ethereum/getSyncStatus.js";
+import { getClientVersion } from "./ethereum/getClientVersion.js";
 
 const read_only_tools = [
   getEthBalance,
@@ -68,7 +68,7 @@ const read_only_tools = [
   getProtocolVersion,
   getSimulatedTransactions,
   getSyncStatus,
-  getClientVersion
+  getClientVersion,
 ];
 
 export const tools = WRITE_TOOLS_ENABLED

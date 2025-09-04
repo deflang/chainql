@@ -1,4 +1,4 @@
-import { getTransactionReceipt } from "../../tools/getTransactionReceipt";
+import { getTransactionReceipt } from "../../tools/ethereum/getTransactionReceipt";
 
 global.fetch = jest.fn();
 

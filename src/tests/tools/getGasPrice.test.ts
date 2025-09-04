@@ -1,4 +1,4 @@
-import { getGasPrice } from "../../tools/getGasPrice";
+import { getGasPrice } from "../../tools/ethereum/getGasPrice";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

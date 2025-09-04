@@ -1,4 +1,4 @@
-import { getCode } from "../../tools/getCode";
+import { getCode } from "../../tools/ethereum/getCode";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

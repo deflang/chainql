@@ -1,4 +1,4 @@
-import { getGasEstimate } from "../../tools/getGasEstimate";
+import { getGasEstimate } from "../../tools/ethereum/getGasEstimate";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

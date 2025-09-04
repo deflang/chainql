@@ -1,4 +1,4 @@
-import { getWork } from "../../tools/getWork";
+import { getWork } from "../../tools/ethereum/getWork";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

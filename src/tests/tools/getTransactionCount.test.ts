@@ -1,4 +1,4 @@
-import { getTransactionCount } from "../../tools/getTransactionCount";
+import { getTransactionCount } from "../../tools/ethereum/getTransactionCount";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

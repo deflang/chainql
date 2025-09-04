@@ -1,4 +1,4 @@
-import { getEthBalance } from "../../tools/getBalance";
+import { getEthBalance } from "../../tools/ethereum/getBalance";
 import { INFURA_CHAIN_URLS } from "../../config/chains";
 
 global.fetch = jest.fn();

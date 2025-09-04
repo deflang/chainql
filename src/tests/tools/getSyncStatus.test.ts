@@ -1,4 +1,4 @@
-import { getSyncStatus } from "../../tools/getSyncStatus";
+import { getSyncStatus } from "../../tools/ethereum/getSyncStatus";
 
 global.fetch = jest.fn();
 
